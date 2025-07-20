@@ -10,17 +10,19 @@ async function scrapeAndSum() {
     await page.goto(url);
     await page.waitForSelector("table");
 
+    // Extract all numbers in <td> tags
     const numbers = await page.$$eval("table td", tds =>
       tds.map(td => parseInt(td.innerText.trim())).filter(n => !isNaN(n))
     );
 
     const pageSum = numbers.reduce((a, b) => a + b, 0);
-    console.log(`Seed ${seed}: ${pageSum}`);
     totalSum += pageSum;
   }
 
   await browser.close();
-  console.log(`✅ Total Sum: ${totalSum}`);
+
+  // 👇 Must print exactly like this
+  console.log(`Total sum: ${totalSum}`);
 }
 
 scrapeAndSum();
