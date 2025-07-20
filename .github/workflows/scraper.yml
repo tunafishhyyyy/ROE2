@@ -3,14 +3,14 @@ name: Scrape and Sum Tables – 24f2001499@ds.study.iitm.ac.in
 on:
   push:
     paths:
-      - scrape.js
-  workflow_dispatch:  
+      - script.js
+  workflow_dispatch:  # ✅ Allow manual runs
 
 jobs:
   run-scraper:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
+      - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Setup Node.js
@@ -18,8 +18,9 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install dependencies
+      - name: Install Playwright
         run: npm install playwright
 
-      - name: Run scraper script – 24f2001499@ds.study.iitm.ac.in
-        run: node scrape.js
+      - name: Run scraper – 24f2001499@ds.study.iitm.ac.in
+        run: |
+          node script.js
